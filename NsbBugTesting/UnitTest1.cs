@@ -11,10 +11,9 @@ namespace NsbBugTesting
         [Test]
         public void Test()
         {
-            new DirectoryInfo(Directory.GetCurrentDirectory())
-                .GetFiles("*.dll")
-                .Select(fi => System.Reflection.Assembly.LoadFile(fi.FullName))
-                .ToList();
+            var path = Path.GetFullPath("NsbBug.dll");
+            //Commmet out this line, and the test is green
+            System.Reflection.Assembly.LoadFile(path);
 
             using var webApplicationFactory = new WebApplicationFactory<Program>();
             using var scope = webApplicationFactory.Services.CreateScope();
